@@ -1,6 +1,8 @@
+package com.linkedList.implementation;
+
 public abstract class ListItem {
-    private ListItem leftLink = null;
-    private ListItem rightLink = null;
+    protected ListItem leftLink = null;
+    protected ListItem rightLink = null;
     private Object value;
 
     public ListItem(Object value) {
