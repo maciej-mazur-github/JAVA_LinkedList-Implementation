@@ -1,34 +1,34 @@
 package com.linkedList.implementation;
 
-public class Node extends ListItem{
+public class Node extends Item {
     public Node(Object value) {
         super(value);
     }
 
     @Override
-    public ListItem next() {
+    public Item next() {
         return rightLink;
     }
 
     @Override
-    public ListItem setNext(ListItem item) {
+    public Item setNext(Item item) {
         rightLink = item;
         return item;
     }
 
     @Override
-    public ListItem previous() {
+    public Item previous() {
         return leftLink;
     }
 
     @Override
-    public ListItem setPrevious(ListItem item) {
+    public Item setPrevious(Item item) {
         leftLink = item;
         return item;
     }
 
     @Override
-    public int compareTo(ListItem item) {
+    public int compareTo(Item item) {
         return ((String) super.getValue()).compareTo((String) item.getValue());
     }
 }
