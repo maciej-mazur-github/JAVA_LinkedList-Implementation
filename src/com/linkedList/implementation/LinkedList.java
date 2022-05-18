@@ -39,7 +39,7 @@ public class LinkedList implements List {
             } else if(comparison > 0) {  // added newNode is less than the current newNode
                 if(currentItem == root) {
                     root = newNode;
-                    newNode.setPrevious(root);
+                    //newNode.setPrevious(root);
                     newNode.setNext(currentItem).setPrevious(newNode);
                     //System.out.println("\"" + (String) newNode.getValue() + "\" has been successfully added as a new list root");
                 } else {
@@ -59,7 +59,36 @@ public class LinkedList implements List {
 
     @Override
     public void removeItem(Object removedItem) {
-        Item removedNode = new Node(removedItem);
+        if(root == null) {
+            System.out.println("The list is empty. Nothing to remove");
+            return;
+        }
+
+        Item foundItem = containsItem(removedItem);
+
+        if(foundItem == null) {
+            System.out.println("\"" + removedItem + "\" could not be found in the list, hence no deletion processed");
+            return;
+        }
+
+        if(foundItem.previous() == null && foundItem.next() == null) {    // if the searched for item is actually the root and is the only one element in the list
+            root = null;
+            System.out.println("\"" + removedItem + "\" successfully removed. The list is empty now");
+        } else if(foundItem.previous() == null && foundItem.next() != null) {  // if item is the root but there is at least one element more in the list
+            root = root.next();
+            root.setPrevious(null);
+            //root.setNext(root.next()).setPrevious(null);
+            System.out.println("\"" + removedItem + "\" was the first element in the list and has been successfully deleted");
+        } else if(foundItem.previous() != null && foundItem.next() != null) {  // if the item is in middle of the list, having at least one previous element and at least one next element
+            System.out.println("\"" + removedItem + "\" successfully removed from the list");
+            foundItem.previous().setNext(foundItem.next()).setPrevious(foundItem.previous());
+        } else {                                            // if the item is at the last position in the list, having no successor
+            System.out.println("\"" + removedItem + "\" successfully removed from the end of the list");
+            foundItem.previous().setNext(null);
+        }
+
+
+        /*Item removedNode = new Node(removedItem);
         
         if(root == null) {
             System.out.println("The list is empty. Nothing to remove");
@@ -85,9 +114,9 @@ public class LinkedList implements List {
         }
 
         Item currentItem = root.next();
-        int comparison;
+        int comparison;*/
         
-        while(true) {
+        /*while(true) {
             comparison = currentItem.compareTo(removedNode);
 
             if(comparison > 0) {  // searched item is less than the current item, which means it is not present in the list (any further list items will only be even greater)
@@ -111,7 +140,7 @@ public class LinkedList implements List {
 
                 return;
             }
-        }
+        }*/
 
     }
 
@@ -143,13 +172,12 @@ public class LinkedList implements List {
 
     @Override
     public Item containsItem(Object searchedItem) {
-        Item searchedNode = new Node(searchedItem);
-
         if(root == null) {
             System.out.println("The list is empty.");
             return null;
         }
 
+        Item searchedNode = new Node(searchedItem);
 
         if(searchedNode.compareTo(root) == 0) {   // if the searched for item is actually the root
             return root;

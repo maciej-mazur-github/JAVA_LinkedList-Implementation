@@ -10,9 +10,10 @@ public class Main {
             myList.addItem(s);
         }
 
+
         myList.traverseList();
 
-        myList.removeItem("B");
+        myList.removeItem("F");
         myList.traverseList();
         myList.addItem("A");
         myList.traverseList();
