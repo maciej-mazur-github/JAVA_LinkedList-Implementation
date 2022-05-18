@@ -1,5 +1,7 @@
 package com.linkedList.implementation;
 
+import java.util.Scanner;
+
 public class LinkedList implements List {
     private Item root = null;
 
@@ -135,6 +137,59 @@ public class LinkedList implements List {
             }
 
             currentItem = currentItem.next();
+        }
+    }
+
+
+    @Override
+    public Item containsItem(Object searchedItem) {
+        Item searchedNode = new Node(searchedItem);
+
+        if(root == null) {
+            System.out.println("The list is empty.");
+            return null;
+        }
+
+
+        if(searchedNode.compareTo(root) == 0) {   // if the searched for item is actually the root
+            return root;
+        }
+
+        if(root.next() == null) {  // if list has one element only and it is not equal to removed searchedNode
+            return null;
+        }
+
+        Item currentItem = root.next();
+        int comparison;
+
+        while(true) {
+            comparison = currentItem.compareTo(searchedNode);
+
+            if(comparison > 0) {  // searched item is less than the current item, which means it is not present in the list (any further list items will only be even greater)
+                return null;
+            } else if(comparison < 0) {  // searched item is greater than the current one
+                if(currentItem.next() == null) {  // no more items in the list, hence the item searched for is not present in the list
+                    return null;
+                } else {
+                    currentItem = currentItem.next();  // this will lead to another while loop iteration for the next element in the list
+                }
+            } else {   // found the item supposed to be removed
+                return currentItem;
+            }
+        }
+    }
+
+
+    public void containsItem() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("What element are you searching for?: ");
+        String choice = scanner.nextLine();
+        Item foundItem = containsItem(choice);
+
+        if(foundItem != null) {
+            System.out.println("\"" + choice + "\" found in the List");
+        } else {
+            System.out.println("\"" + choice + "\" NOT found in the List");
         }
     }
 }

@@ -16,6 +16,7 @@ public class Main {
         myList.traverseList();
         myList.addItem("A");
         myList.traverseList();
+        myList.containsItem();
 
     }
 }
