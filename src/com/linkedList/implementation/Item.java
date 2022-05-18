@@ -5,18 +5,18 @@ public abstract class Item {
     protected Item rightLink = null;
     private Object value;
 
-    public Item(Object value) {
+    protected Item(Object value) {
         this.value = value;
     }
 
-    public abstract Item next();
-    public abstract Item setNext(Item item);
-    public abstract Item previous();
-    public abstract Item setPrevious(Item item);
+    protected abstract Item next();
+    protected abstract Item setNext(Item item);
+    protected abstract Item previous();
+    protected abstract Item setPrevious(Item item);
 
-    public abstract int compareTo(Item item);
+    protected abstract int compareTo(Item item);
 
-    public Object getValue() {
+    protected Object getValue() {
         return value;
     }
 }

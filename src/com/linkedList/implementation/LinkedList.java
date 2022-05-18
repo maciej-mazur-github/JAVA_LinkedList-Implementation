@@ -84,7 +84,24 @@ public class LinkedList implements List {
             comparison = currentItem.compareTo(removedItem);
 
             if(comparison > 0) {  // searched item is less than the current item, which means it is not present in the list (any further list items will only be even greater)
-                System.out.println();
+                System.out.println("\"" + (String) removedItem.getValue() + "\" could not be found in the list, hence no deletion processed");
+                return;
+            } else if(comparison < 0) {  // searched item is greater than the current one
+                if(currentItem.next() == null) {  // no more items in the list, hence the item searched for is not present in the list
+                    System.out.println("\"" + (String) removedItem.getValue() + "\" could not be found in the list, hence no deletion processed");
+                    return;
+                } else {
+                    currentItem = currentItem.next();  // this will lead to another while loop iteration for the next element in the list
+                }
+            } else {   // found the item supposed to be removed
+                if(currentItem.next() == null) { // removed item is the last element in the list
+                    System.out.println("\"" + (String) removedItem.getValue() + "\" successfully removed from the end of the list");
+                    currentItem.previous().setNext(null);
+                    return;
+                } else {
+                    System.out.println("\"" + (String) removedItem.getValue() + "\" successfully removed from the list");
+                    currentItem.previous().setNext(currentItem.next()).setPrevious(currentItem.previous());
+                }
             }
         }
 
@@ -92,6 +109,33 @@ public class LinkedList implements List {
 
     @Override
     public void traverseList() {
+        if(root == null) {
+            System.out.println("The list is empty");
+            return;
+        }
 
+        Item currentItem = root;
+
+        while(currentItem != null) {
+            System.out.print("\"" + (String)currentItem.getValue() + "\", ");
+            currentItem = currentItem.next();
+        }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
