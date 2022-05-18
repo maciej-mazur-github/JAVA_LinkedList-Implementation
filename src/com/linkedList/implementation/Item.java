@@ -5,7 +5,7 @@ public abstract class Item {
     protected Item rightLink = null;
     private Object value;
 
-    protected Item(Object value) {
+    Item(Object value) {
         this.value = value;
     }
 

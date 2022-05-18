@@ -2,7 +2,7 @@ package com.linkedList.implementation;
 
 public interface List {
     Item getRoot();
-    void addItem(Item item);
-    void removeItem(Item item);
+    void addItem(Object item);
+    void removeItem(Object item);
     void traverseList();
 }

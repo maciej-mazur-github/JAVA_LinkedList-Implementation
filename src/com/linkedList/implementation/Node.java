@@ -1,7 +1,7 @@
 package com.linkedList.implementation;
 
 public class Node extends Item {
-    public Node(Object value) {
+    protected Node(Object value) {
         super(value);
     }
 
