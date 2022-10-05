@@ -13,6 +13,7 @@ public class Main {
 
         myList.traverseList();
 
+        myList.removeItem("A");
         myList.removeItem("F");
         myList.traverseList();
         myList.addItem("A");
